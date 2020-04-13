@@ -19,6 +19,7 @@
   ],
   "author": "Vojta Jina <vojta.jina@gmail.com>",
   "dependencies": {
+    "is-wsl": "^2.1.1",
     "which": "^1.2.1"
   },
   "license": "MIT",

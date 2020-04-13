@@ -64,7 +64,7 @@ module.exports = function (grunt) {
 
   require('load-grunt-tasks')(grunt)
 
-  grunt.registerTask('test', ['simplemocha'])
+  grunt.registerTask('test', ['simplemocha', 'karma'])
   grunt.registerTask('default', ['test'])
 
   grunt.registerTask('release', 'Bump the version and publish to NPM.', function (type) {
