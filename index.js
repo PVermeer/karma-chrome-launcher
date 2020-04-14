@@ -68,7 +68,7 @@ var ChromeBrowser = function (baseBrowserDecorator, args) {
       const translatedUserDataDir = execSync('wslpath -w ' + userDataDir).toString().trim()
 
       // Translate command to a windows path to make it possisible to get the pid.
-      let commandPrepare = command.split('/')
+      let commandPrepare = this.DEFAULT_CMD.win32.split('/')
       const executable = commandPrepare.pop()
       commandPrepare = commandPrepare.join('/')
         .replace(/\s/g, '\\ ')
@@ -119,7 +119,7 @@ var ChromeBrowser = function (baseBrowserDecorator, args) {
     }
 
     if (isWsl) {
-      if (!which.sync(this.DEFAULT_CMD.linux, { nothrow: true })) {
+      if (!this.DEFAULT_CMD.linux || !which.sync(this.DEFAULT_CMD.linux, { nothrow: true })) {
         // If Chrome is not installed on Linux side then always use windows.
         useWindowsWSL()
       } else {
