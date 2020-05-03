@@ -3,6 +3,7 @@ var fs = require('fs')
 var path = require('path')
 var which = require('which')
 const isWsl = require('is-wsl')
+const isDocker = require('is-docker')()
 const { spawn, execSync } = require('child_process')
 const { StringDecoder } = require('string_decoder')
 const rimraf = require('rimraf')
@@ -394,8 +395,8 @@ function headlessGetOptions(url, args, parent) {
     '--disable-dev-shm-usage'
   ])
 
-  // Headless does not work with sandboxing with WSL
-  if (isWsl) { mergedArgs.push('--no-sandbox') }
+  // Headless does not work with sandboxing on WSL or docker
+  if (isWsl || isDocker) { mergedArgs.push('--no-sandbox') }
 
   var isRemoteDebuggingFlag = function (flag) {
     return flag.indexOf('--remote-debugging-port=') !== -1
